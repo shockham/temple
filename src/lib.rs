@@ -20,8 +20,13 @@ fn test_html(){
     assert!(html_string == String::from_str("<!DOCTYPE html><head><title>hello</title></head><body>content</body></html>"))
 }
 
+
 pub fn div(class:&str, content:String) -> String{ elem("div", class, content) }
 pub fn span(class:&str, content:String) -> String{ elem("span", class, content) }
+pub fn img(class:&str, content:String) -> String{ elem("img", class, content) }
+pub fn p(class:&str, content:String) -> String{ elem("p", class, content) }
+pub fn ul(class:&str, content:String) -> String{ elem("ul", class, content) }
+pub fn li(class:&str, content:String) -> String{ elem("li", class, content) }
 
 #[test]
 fn test_div(){
