@@ -5,8 +5,8 @@ Simple HTML templating in rust
 
 ```rust
 let html_string = html("Hello",
-    elem("div", "class=\"test\"",
-        elem("span", "", String::from_str("content"))
+    div("class=\"test\"",
+        span("", String::from_str("content"))
     )
 );
 ```

@@ -19,3 +19,12 @@ fn test_html(){
     let html_string = html("hello", String::from_str("content"));
     assert!(html_string == String::from_str("<!DOCTYPE html><head><title>hello</title></head><body>content</body></html>"))
 }
+
+pub fn div(class:&str, content:String) -> String{ elem("div", class, content) }
+pub fn span(class:&str, content:String) -> String{ elem("span", class, content) }
+
+#[test]
+fn test_div(){
+    let div_string = div("", String::from_str("content"));
+    assert!(div_string == String::from_str("<div >content</div>"))
+}
