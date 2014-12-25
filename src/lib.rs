@@ -1,3 +1,4 @@
+#![feature(globs)]
 
 pub fn elem(elem_type:&str, class:&str, content:String) -> String{
     format!("<{e_type} {class}>{value}</{e_type}>",e_type=elem_type,value=content,class=class)
