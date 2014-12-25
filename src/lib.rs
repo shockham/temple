@@ -22,6 +22,7 @@ fn test_html(){
 }
 
 
+pub fn h1(class:&str, content:String) -> String{ elem("h1", class, content) }
 pub fn div(class:&str, content:String) -> String{ elem("div", class, content) }
 pub fn span(class:&str, content:String) -> String{ elem("span", class, content) }
 pub fn img(class:&str, content:String) -> String{ elem("img", class, content) }
@@ -33,4 +34,10 @@ pub fn li(class:&str, content:String) -> String{ elem("li", class, content) }
 fn test_div(){
     let div_string = div("", String::from_str("content"));
     assert!(div_string == String::from_str("<div >content</div>"))
+}
+
+#[test]
+fn test_h1(){
+    let h1_string = h1("", String::from_str("content"));
+    assert!(h1_string == String::from_str("<h1 >content</h1>"))
 }
