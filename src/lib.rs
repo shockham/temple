@@ -1,5 +1,3 @@
-#![feature(globs)]
-
 pub fn elem(elem_type:&str, class:&str, content:String) -> String{
     format!("<{e_type} {class}>{value}</{e_type}>",e_type=elem_type,value=content,class=class)
 }
@@ -21,6 +19,17 @@ fn test_html(){
     assert!(html_string == String::from_str("<!DOCTYPE html><head><title>hello</title></head><body>content</body></html>"))
 }
 
+#[test]
+fn test_html_elem(){
+    let html_string = html("hello", elem("div", "class=\"test\"", String::from_str("content")));
+    assert!(html_string == String::from_str("<!DOCTYPE html><head><title>hello</title></head><body><div class=\"test\">content</div></body></html>"))
+}
+
+#[test]
+fn test_elem_addition(){
+    let html_string = elem("b", "", "content".to_string()) + elem("b", "", "content".to_string()).as_slice();
+    assert!(html_string == "<b >content</b><b >content</b>")
+}
 
 pub fn h1(class:&str, content:String) -> String{ elem("h1", class, content) }
 pub fn div(class:&str, content:String) -> String{ elem("div", class, content) }
