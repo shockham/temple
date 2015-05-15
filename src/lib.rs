@@ -1,11 +1,14 @@
+#![feature(collections)]
+#![feature(convert)]
+
 pub fn elem(elem_type:&str, class:&str, content:String) -> String{
     format!("<{e_type} {class}>{value}</{e_type}>",e_type=elem_type,value=content,class=class)
 }
 
 #[test]
 fn test_elem(){
-    let elem_string = elem("div", "class=\"test\"", String::from_str("content"));
-    assert!(elem_string == String::from_str("<div class=\"test\">content</div>"))
+    let elem_string = elem("div", "class=\"test\"", "content".to_string());
+    assert!(elem_string == "<div class=\"test\">content</div>".to_string())
 }
 
 
@@ -15,19 +18,19 @@ pub fn html(title:&str, content:String) -> String{
 
 #[test]
 fn test_html(){
-    let html_string = html("hello", String::from_str("content"));
-    assert!(html_string == String::from_str("<!DOCTYPE html><head><title>hello</title></head><body>content</body></html>"))
+    let html_string = html("hello", "content".to_string());
+    assert!(html_string == "<!DOCTYPE html><head><title>hello</title></head><body>content</body></html>".to_string())
 }
 
 #[test]
 fn test_html_elem(){
     let html_string = html("hello", elem("div", "class=\"test\"", String::from_str("content")));
-    assert!(html_string == String::from_str("<!DOCTYPE html><head><title>hello</title></head><body><div class=\"test\">content</div></body></html>"))
+    assert!(html_string == "<!DOCTYPE html><head><title>hello</title></head><body><div class=\"test\">content</div></body></html>".to_string())
 }
 
 #[test]
 fn test_elem_addition(){
-    let html_string = elem("b", "", "content".to_string()) + elem("b", "", "content".to_string()).as_slice();
+    let html_string = elem("b", "", "content".to_string()) + elem("b", "", "content".to_string()).as_str();
     assert!(html_string == "<b >content</b><b >content</b>")
 }
 
@@ -41,12 +44,12 @@ pub fn li(class:&str, content:String) -> String{ elem("li", class, content) }
 
 #[test]
 fn test_div(){
-    let div_string = div("", String::from_str("content"));
-    assert!(div_string == String::from_str("<div >content</div>"))
+    let div_string = div("", "content".to_string());
+    assert!(div_string == "<div >content</div>".to_string())
 }
 
 #[test]
 fn test_h1(){
-    let h1_string = h1("", String::from_str("content"));
-    assert!(h1_string == String::from_str("<h1 >content</h1>"))
+    let h1_string = h1("", "content".to_string());
+    assert!(h1_string == "<h1 >content</h1>".to_string())
 }
