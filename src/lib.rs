@@ -1,6 +1,6 @@
-#![feature(collections)]
 #![feature(convert)]
 
+/// basic way of creating any element
 pub fn elem(elem_type:&str, class:&str, content:String) -> String{
     format!("<{e_type} {class}>{value}</{e_type}>",e_type=elem_type,value=content,class=class)
 }
@@ -11,20 +11,20 @@ fn test_elem(){
     assert!(elem_string == "<div class=\"test\">content</div>".to_string())
 }
 
-
-pub fn html(title:&str, content:String) -> String{
-    format!("<!DOCTYPE html><head><title>{}</title></head><body>{}</body></html>", title, content)
+/// create an html page
+pub fn html(head:String, body:String) -> String{
+    format!("<!DOCTYPE html><head>{}</head><body>{}</body></html>", head, body)
 }
 
 #[test]
 fn test_html(){
-    let html_string = html("hello", "content".to_string());
+    let html_string = html(title("hello".to_string()), "content".to_string());
     assert!(html_string == "<!DOCTYPE html><head><title>hello</title></head><body>content</body></html>".to_string())
 }
 
 #[test]
 fn test_html_elem(){
-    let html_string = html("hello", elem("div", "class=\"test\"", String::from_str("content")));
+    let html_string = html(title("hello".to_string()), elem("div", "class=\"test\"", String::from("content")));
     assert!(html_string == "<!DOCTYPE html><head><title>hello</title></head><body><div class=\"test\">content</div></body></html>".to_string())
 }
 
@@ -41,6 +41,7 @@ pub fn img(class:&str, content:String) -> String{ elem("img", class, content) }
 pub fn p(class:&str, content:String) -> String{ elem("p", class, content) }
 pub fn ul(class:&str, content:String) -> String{ elem("ul", class, content) }
 pub fn li(class:&str, content:String) -> String{ elem("li", class, content) }
+pub fn title(content:String) -> String{ format!("<title>{}</title>", content) }
 
 #[test]
 fn test_div(){
@@ -52,4 +53,10 @@ fn test_div(){
 fn test_h1(){
     let h1_string = h1("", "content".to_string());
     assert!(h1_string == "<h1 >content</h1>".to_string())
+}
+
+#[test]
+fn test_title(){
+    let title = title("test".to_string());
+    assert!(title == "<title>test</title>".to_string())
 }
